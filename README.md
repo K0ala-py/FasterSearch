@@ -31,7 +31,7 @@ python FasterSearch.py -h
 ```
 ### help
 - -u  |  Enter URL
-- -s  |  Enter status you want (200,404,403,) {if you want see all pages != 404, enter 'all'}
+- -s  |  Enter status you want (200,404,403) {if you want see all pages != 404, enter 'all'}
 
 ### examples:
 
