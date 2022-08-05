@@ -17,7 +17,7 @@ You have need this library for use my script:
 
 ### Linux / Windows 
 ```bash
-cd FasterSearch-main
+cd FasterSearch
 pip install -r requirements.txt
 ```
     
