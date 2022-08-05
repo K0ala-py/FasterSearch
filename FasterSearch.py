@@ -1,27 +1,42 @@
 import requests
-import pyautogui as p
 import threading as th
 from rich import print
 import time
+import argparse
+import textwrap
+import os
 
-url = p.prompt('Enter URL:','URL')
-code = p.prompt('STATUS FILTERED (enter "all" for any status)','STATUS')
+# Creating an interface
+parser = argparse.ArgumentParser(description="FasterSearch is a beautifull script for the DirSearch",
+formatter_class = argparse.RawDescriptionHelpFormatter,
+epilog=textwrap.dedent('''Exemption:\n
+fastersearch.py -u http://example.com -s <status(200,403...) Enter "all" for all != 404>
+'''))
+
+#help
+def help():
+    from rich import print
+    print("\n[bold]fastersearch.py -u and -s missing check the [-h] or [--help] to display the help command[bold]")
+    os.system("python fastersearch.py -h")
+    return ''
+
+parser.add_argument('-u','--url',type=str, help='Enter URL')
+parser.add_argument('-s','--code',type=str,help='Enter status you want')
+args = parser.parse_args()
+
+url = args.url
+code = args.code
 
 def title():
     print('''[bold red]
-
-
-    ______           __            _____                      __  
-   / ____/___ ______/ /____  _____/ ___/___  ____ ___________/ /_ 
-  / /_  / __ `/ ___/ __/ _ \/ ___/\__ \/ _ \/ __ `/ ___/ ___/ __ \\\
- 
- / __/ / /_/ (__  ) /_/  __/ /   ___/ /  __/ /_/ / /  / /__/ / / /
-/_/    \__,_/____/\__/\___/_/   /____/\___/\__,_/_/   \___/_/ /_/ 
-
+    ______           __            [blue]_____                      __[/blue]  
+   / ____/___ ______/ /____  _____[blue]/ ___/___  ____ ___________/ /_ [/blue]
+  / /_  / __ `/ ___/ __/ _ \/ ___/[blue]\__ \/ _ \/ __ `/ ___/ ___/ __ \\\\[/blue]
+ / __/ / /_/ (__  ) /_/  __/ /   [blue]___/ /  __/ /_/ / /  / /__/ / / /[/blue]
+/_/    \__,_/____/\__/\___/_/   [blue]/____/\___/\__,_/_/   \___/_/ /_/[/blue]
 
 
     [/bold red]''')
-
 
 
 def search(from_,to_,code=code,url=url):
@@ -42,14 +57,9 @@ def search(from_,to_,code=code,url=url):
                 if code == 'all':
                     if  req.status_code != 404:
                         print('[ '+str(req.status_code)+' ]  '+ url+' ----> /'+word)
-                        #print(str(x)+'/1837\n')
-                   # else:
-                        #print(word)
                 else:
                     if  req.status_code == int(code):
                         print('[ '+str(req.status_code)+' ]  '+ url+' ----> /'+word)
-                        #print(str(x)+'/1837\n')
-                #print('Sto a: '+str(x)+'/1837')
     except:
         nothing = 'nothing'
 
@@ -61,6 +71,7 @@ def DirSearch():
     try:    
         if __name__ == '__main__':
             title()
+            print('[bold green3][  [orange1]Scan...[/orange1]  ][/bold green3]')
             th.Thread(target=timeout).start()
             th.Thread(target=search,args=(0,56)).start()    #1
             th.Thread(target=search,args=(57,112)).start()
