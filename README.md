@@ -34,8 +34,8 @@ pip install -r requirements.txt
     
 ## Use
 
-For help write:
 BOTH FUNCTIONS ARE MANDATORY!
+For help write:
 
 ```bash
 python FasterSearch.py -h
